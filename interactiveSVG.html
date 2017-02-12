@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+ <head>
+  <meta http-equiv="pragma" content="no-cache" />
+  <!--<meta http-equiv="expires" content="Fri, 03 Feb 2017 12:00:00 EST"/>-->
+  <meta charset="utf-8">
+  <link type="text/css" rel="stylesheet"  href="./style.css" />
+  <script src='data.js' type="text/javascript"></script>
+  <script type="text/javascript">
+  function checkShiftEnter(evnt) {
+    if (evnt.keyCode == 13 && evnt.shiftKey) {
+      evnt.target.parentElement.submit()
+      return false
+      }
+  }
+  var count=1;//number of commands entered
+  function appendHistory(t,id) {
+    t=t.replace(new RegExp('<', 'g'),'&lt;')
+    t=t.replace(new RegExp('>', 'g'),'&gt;')
+    if (t != '') {
+    
+    document.querySelector("#forms_history_div").insertAdjacentHTML('afterbegin','<section class=history><div class=\'count\'>['+count+']:</div><code class=\'hist_code\' id=\''+id+'\' count='+count+'><pre>'+t+'</pre></code><br>')
+    count=count+1;
+    console.log("history count: "+count)
+  }
+  }
+  //form submission functions 
+  function appendSVG(txt,hstry=true) {   //Append txt to 'main' svg element
+    document.getElementById('main').innerHTML=document.getElementById('main').innerHTML+txt
+    document.getElementById('appendSvgTA').value=''
+    if (hstry) {appendHistory(txt,'appendSVG_history');}
+    }
+  function evalJS(txt) {   //Evaluate javascript txt (txt == content of form input)
+    eval(txt)
+    appendHistory(txt,'evalJS_history');
+    }
+   function setSVG(txt) {   //set SVG to txt (txt == content of form input)
+    //document.getElementsByName('svgn')[0].innerHTML=txt
+    document.getElementById('main').innerHTML=txt
+    document.getElementById('setSvgTA').value=txt
+    appendHistory(txt,'setSVG_history');
+    }
+  function style(txt) {   // txt == content of form input
+    document.getElementById('CSS').innerHTML = document.getElementById('CSS').innerHTML + txt
+    appendHistory(txt,'style_history');
+    }
+  </script>
+  <style id='CSS'></style>
+ </head>
+
+ <body>
+
+ <svg class='svg' name='svgn' id='main' width='600px' height='400px'>
+ </svg>
+
+ <form class='cli' name="setForm" action="javascript:setSVG(setSvgTA.value)">
+    <textarea name="setSVGTA" id="setSvgTA" onkeypress="return checkShiftEnter(event)" rows="1" cols="100"><circle cx=200 cy=200 class=pumpkin r=2></circle>
+    </textarea>
+    <input name="Submit" type="submit" value="setSVG"/>
+  </form>
+
+  <form class='cli' name="appendForm" action="javascript:appendSVG(appendSvgTA.value)">  
+   <textarea name="appendSvgTA" id="appendSvgTA" onkeypress="return checkShiftEnter(event)" rows="1" cols="100"><circle cx=300 cy=200 r=30 class="apple"></circle>
+   </textarea>
+   <input name="Submit"  type="submit" value="Append SVG"/>
+  </form>
+
+  <form class='cli' name="jsForm" action="javascript:evalJS(jsTA.value)">  
+   <textarea name="jsTA" id="jsTA" onkeypress="return checkShiftEnter(event)" rows="5" cols="100">
+   var svg = document.querySelector('svg')
+   var data = [];
+   var i;   for (i = 0; i < 100; i++) {
+   data.push({x: Math.random() * 600, y: Math.random() * 400}); // random data points
+   }
+   for (i = 0; i < 100; i++) {
+   appendSVG('<circle cx='+data[i].x+' cy='+data[i].y+' class=pumpkin r=2></circle>',hstry=false)   
+}
+   </textarea>
+   <input name="Submit"  type="submit" value="Eval JS"/>
+  </form>
+  <form class='cli' name="cssForm" action="javascript:style(styleTA.value)">  
+   <textarea name="styleTA" id="styleTA" onkeypress="return checkShiftEnter(event)" rows="3" cols="100">
+  .apple {
+    fill: red;
+    stroke: green;
+    stroke-width: 2;
+  }
+  .pumpkin {
+    fill: yellow;
+    stroke: orange;
+    stroke-width: 2;
+  }
+   </textarea>
+   <input name="cssSend"  type="submit" value="Style"/>
+  </form>
+  
+  <div id="forms_history_div"></div>
+  </body>
+</html>

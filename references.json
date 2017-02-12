@@ -1,0 +1,48 @@
+/*
+References for interactiveSVG.html
+
+Objects are shorthand names for references
+
+Properties could include a hyperlink url, description, date accessed, author(s)...
+*/
+{
+	"vinnyPythonNotebook": {
+		"description": "Vinny's python notebook",
+		"date": "2017-02-12",
+		"author": "VNM"
+	},
+	"jupyterNotebook": {
+		"url": "http://jupyter.org/index.html",
+		"description": "jupyter python notebook",
+		"dateAccessed": "2017-02-12"
+	},
+	"w3CSS": {
+		"urls": "https://www.w3.org/TR/css-overflow-3/, https://www.w3.org/TR/css-display-3/#containing-block",
+		"description": "w3.org CSS docs",
+		"dateAccessed": "2017-02-12"
+	},
+	"w3SVG": {
+		"url": "http://www.w3.org/TR/SVG11/",
+		"dateAccessed": "2017-02-12"
+	},
+	"HTML CSS Book": {
+		"description": "book",
+		"author": "",
+		"date": "2017-02-12"
+	},
+	"Murray": {
+		"url": "http://alignedleft.com/tutorials/d3/an-svg-primer",
+		"dateAccessed": "2017-02-12",
+		"author": "Scott Murray"
+	},
+	"Cukier": {
+		"url": "http://www.jeromecukier.net/blog/2015/05/19/you-may-not-need-d3/",
+		"dateAccessed": "2017-02-12",
+		"author": "Jerome Cukier"
+	}
+	"Soueidan": {
+		"url": "https://sarasoueidan.com/blog/svg-coordinate-systems/",
+		"dateAccessed": "2017-02-12",
+		"author": "Sara Soueidan"
+	}
+}

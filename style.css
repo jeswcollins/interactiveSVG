@@ -1,0 +1,75 @@
+body {
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: visible;
+    margin: auto auto;
+  } 
+
+ svg {
+    display: flex;
+    flex-direction: row;
+    /*width: 75%;
+    width: 600px;*/
+    margin: auto auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 10px auto 10px 200px;
+  }
+
+
+  .cli {
+    /*display: flex;
+    /*flex-direction: row;
+    /*border-color: #ababab;
+    border: 1px solid; /* transparent;*/
+    /*align-items: stretch;*/
+    width: 75%;
+    margin: 10px auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .history {
+    display: flex;
+    flex-direction: row;
+    /*border-color: #ababab;
+    border: 1px solid; /* transparent;*/
+    /*align-items: stretch;*/
+    /*width: 75%;*/
+    /*min-width: 500;
+    max-width: 800;*/
+    margin: 10px auto;
+    margin-left: 50px;
+    margin-right: auto;
+  }
+
+
+  .count {
+    min-width: 14ex;
+    margin: 0;
+    /*display: box;
+    display: flex;
+    flex-direction: row;*/
+    padding: .4em;
+    color: navy;
+    border-top: 1px;
+    font-family: monospace;
+    text-align: right;
+    line-height: 1.21429em
+  }
+
+  .hist_code{
+    background:#eff0f1; 
+    /*display: block;*/
+    min-width: 400px;
+    max-width: 700px;
+    overflow-x: scroll;
+    /*margin: auto auto;*/
+    box-sizing: border-box;
+  }
+
+  
