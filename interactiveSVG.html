@@ -14,8 +14,10 @@
       return false
       }
   }
-  var count=1;//number of commands entered
-  function appendHistory(t,id) {
+  var count=0;//number of commands entered
+  function newFormString(count) {
+    return '<form class=cli id='+count+' name="jsForm" action="javascript:evalJS(jsTA'+count+'.value)"><textarea id="jsTA'+count+'" onkeypress="return checkShiftEnter(event)" rows="5" cols="100"></textarea><input name="Submit"  type="submit" value="Eval JS"/></form>'}
+  /*function appendHistory(t,id) {
     t=t.replace(new RegExp('<', 'g'),'&lt;')
     t=t.replace(new RegExp('>', 'g'),'&gt;')
     if (t != '') {
@@ -24,18 +26,26 @@
     count=count+1;
     console.log("history count: "+count)
   }
-  }
+  }*/
   //form submission functions 
-  function appendSVG(txt,hstry=true) {   //Append txt to 'main' svg element
+  /*function appendSVG(txt,hstry=true) {   //Append txt to 'main' svg element
     document.getElementById('main').innerHTML=document.getElementById('main').innerHTML+txt
     document.getElementById('appendSvgTA').value=''
     if (hstry) {appendHistory(txt,'appendSVG_history');}
-    }
+    }*/
+  function appendNewForm() {
+    document.getElementById('last').insertAdjacentHTML('beforebegin',newFormString(count))
+  }
   function evalJS(txt) {   //Evaluate javascript txt (txt == content of form input)
-    eval(txt)
-    appendHistory(txt,'evalJS_history');
+    eval(txt);
+    count=count+1
+    //document.count=document.count+1
+    console.log('count: '+count)
+    //console.log('document.count: '+document.count)
+    appendNewForm()
+    /*appendHistory(txt,'evalJS_history');*/
     }
-   function setSVG(txt) {   //set SVG to txt (txt == content of form input)
+   /*function setSVG(txt) {   //set SVG to txt (txt == content of form input)
     //document.getElementsByName('svgn')[0].innerHTML=txt
     document.getElementById('main').innerHTML=txt
     document.getElementById('setSvgTA').value=txt
@@ -44,17 +54,17 @@
   function style(txt) {   // txt == content of form input
     document.getElementById('CSS').innerHTML = document.getElementById('CSS').innerHTML + txt
     appendHistory(txt,'style_history');
-    }
+    }*/
   </script>
   <style id='CSS'></style>
  </head>
 
  <body>
 
- <svg class='svg' name='svgn' id='main' width='600px' height='400px'>
- </svg>
+ <!--<svg class='svg' name='svgn' id='main' width='600px' height='400px'>
+ </svg>-->
 
- <form class='cli' name="setForm" action="javascript:setSVG(setSvgTA.value)">
+ <!--<form class='cli' name="setForm" action="javascript:setSVG(setSvgTA.value)">
     <textarea name="setSVGTA" id="setSvgTA" onkeypress="return checkShiftEnter(event)" rows="1" cols="100"><circle cx=200 cy=200 class=pumpkin r=2></circle>
     </textarea>
     <input name="Submit" type="submit" value="setSVG"/>
@@ -64,22 +74,22 @@
    <textarea name="appendSvgTA" id="appendSvgTA" onkeypress="return checkShiftEnter(event)" rows="1" cols="100"><circle cx=300 cy=200 r=30 class="apple"></circle>
    </textarea>
    <input name="Submit"  type="submit" value="Append SVG"/>
-  </form>
+  </form>-->
 
-  <form class='cli' name="jsForm" action="javascript:evalJS(jsTA.value)">  
-   <textarea name="jsTA" id="jsTA" onkeypress="return checkShiftEnter(event)" rows="5" cols="100">
-   var svg = document.querySelector('svg')
+  <form class='cli' id=0 name="jsForm" action="javascript:evalJS(jsTA0.value)">  
+   <textarea name="jsTA" id="jsTA0" onkeypress="return checkShiftEnter(event)" rows="5" cols="100">
+   document.getElementById('last').insertAdjacentHTML('beforebegin','<svg class="svg" name="svgn" id="main" width="600px" height="400px"></svg>')
    var data = [];
    var i;   for (i = 0; i < 100; i++) {
    data.push({x: Math.random() * 600, y: Math.random() * 400}); // random data points
    }
    for (i = 0; i < 100; i++) {
-   appendSVG('<circle cx='+data[i].x+' cy='+data[i].y+' class=pumpkin r=2></circle>',hstry=false)   
+   document.getElementById('main').innerHTML=document.getElementById('main').innerHTML+'<circle cx='+data[i].x+' cy='+data[i].y+' r=2></circle>'  
 }
    </textarea>
    <input name="Submit"  type="submit" value="Eval JS"/>
   </form>
-  <form class='cli' name="cssForm" action="javascript:style(styleTA.value)">  
+  <!--<form class='cli' name="cssForm" action="javascript:style(styleTA.value)">  
    <textarea name="styleTA" id="styleTA" onkeypress="return checkShiftEnter(event)" rows="3" cols="100">
   .apple {
     fill: red;
@@ -93,8 +103,8 @@
   }
    </textarea>
    <input name="cssSend"  type="submit" value="Style"/>
-  </form>
-  
-  <div id="forms_history_div"></div>
+  </form>-->
+  <div id="last"></div>
+  <!--<div id="forms_history_div"></div>-->
   </body>
 </html>

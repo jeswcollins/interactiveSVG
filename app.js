@@ -12,7 +12,7 @@ var http = require('http'),
 
 var port = 8080;   
 
-var fidArray = ['./scratch.html','./interactiveSVG.html','./data.js','./style.css']
+var fidArray = ['./interactiveSVG.html','./data.js','./style.css']
 
 http.createServer(function(request, response) {  
         fidArray.forEach(function(fid) {
@@ -23,15 +23,6 @@ http.createServer(function(request, response) {
         var fid=request.url
         console.log("request.url: "+request.url);
         //response.writeHeader(200, {"Content-Type": "text/html"});
-        if (request.url=='/scratch.html') {
-          response.writeHeader(200, {"Content-Type": "text/html"});
-          fs.readFile('./scratch.html', function (err, html){
-            if (err) {
-              throw err;
-            }
-            response.write(html);
-            response.end();})
-          }
         if (request.url=='/interactiveSVG.html') {
           response.writeHeader(200, {"Content-Type": "text/html"});
           fs.readFile('./interactiveSVG.html', function (err, html){
