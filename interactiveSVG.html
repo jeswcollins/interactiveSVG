@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <!-- saved from url=(0016)http://localhost -->
 <html>
  <head>
@@ -77,15 +77,14 @@
   </form>-->
 
   <form class='cli' id=0 name="jsForm" action="javascript:evalJS(jsTA0.value)">  
-   <textarea name="jsTA" id="jsTA0" onkeypress="return checkShiftEnter(event)" rows="5" cols="100">
-   document.getElementById('last').insertAdjacentHTML('beforebegin','<svg class="svg" name="svgn" id="main" width="600px" height="400px"></svg>')
+   <textarea name="jsTA" id="jsTA0" onkeypress="return checkShiftEnter(event)" rows="5" cols="100">   document.getElementById('last').insertAdjacentHTML('beforebegin','<svg class="svg" name="svgn" id=s'+count+' width="600px" height="400px"></svg>')
    var data = [];
    var i;   for (i = 0; i < 100; i++) {
    data.push({x: Math.random() * 600, y: Math.random() * 400}); // random data points
    }
    for (i = 0; i < 100; i++) {
-   document.getElementById('main').innerHTML=document.getElementById('main').innerHTML+'<circle cx='+data[i].x+' cy='+data[i].y+' r=2></circle>'  
-}
+   document.getElementById('s'+count).innerHTML=document.getElementById('s'+count).innerHTML+'<circle cx='+data[i].x+' cy='+data[i].y+' r=2></circle>'  
+}//count ensures the svg element is uniquely named and the last one is referenced
    </textarea>
    <input name="Submit"  type="submit" value="Eval JS"/>
   </form>
