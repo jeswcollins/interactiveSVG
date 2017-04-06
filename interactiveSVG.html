@@ -7,7 +7,7 @@
   <!--<meta http-equiv="expires" content="Fri, 03 Feb 2017 12:00:00 EST"/>-->
   <meta charset="utf-8">
   <link type="text/css" rel="stylesheet"  href="./style.css" />
-  <script src='data.js' type="text/javascript"></script>
+  <!--<script src='data.js' type="text/javascript"></script>-->
   <script type="text/javascript">
   function checkShiftEnter(evnt) {
     if (evnt.keyCode == 13 && evnt.shiftKey) {
@@ -24,22 +24,18 @@
   function appendNewPrompt(form,prefill='') {
     form.insertAdjacentHTML('afterend',newFormStringOpen(count)+prefill+newFormStringClose(count))
   }
-  function svg(el) {
+  function getCurrentOutput(form) {
+    return form.parentElement.nextSibling
+  }
+  function svg(form) {
+    //return getCurrentOutput(form).appendChild()
   }
   function evalJS(form,t) {//Evaluate form javascript: form is the form, t is textarea text (javascript)
+    console.log("form.parentElement.nextSibling.className: "+form.parentElement.nextSibling.className)//div classname=output
+    //appendNewForm(t)
+    var output = getCurrentOutput(form)
     eval(t)
     count=count+1
-    console.log("form.parentElement: "+form.parentElement)
-    console.log("form.parentElement.class: "+form.parentElement.class)
-    console.log("form.parentElement.className: "+form.parentElement.className)
-    console.log("form.parentElement.id: "+form.parentElement.id)
-    console.log("form.parentElement.getAttribute(name): "+form.parentElement.getAttribute("name"))
-    console.log("form.previousSibling: "+form.previousSibling)
-    console.log("form.parentElement.parentElement: "+form.parentElement.parentElement)
-    console.log("form.parentElement.parentElement.previousSibling: "+form.parentElement.parentElement.previousSibling)
-    console.log("form.parentElement.nextSibling: "+form.parentElement.nextSibling)//div class=output
-    console.log("form.parentElement.nextSibling.className: "+form.parentElement.nextSibling.className)
-    //appendNewForm(t)
   }
   function appendHTML(el,s,pos='afterend') {
     //TD: add a try catch to check el is an HTML element, s is HTML, and pos is one of four possible positioning values
@@ -49,7 +45,7 @@
 
   }
   function ok(t) {
-    console.log(t)
+    console.log('ok: '+t)
   }
   </script>
   <style id='CSS'></style>
@@ -57,20 +53,21 @@
  <body>
   <div id='body_start'></div>
   <div class=io id=0><div id=0 name=input1 class=input><form class='cli' id=0 name="jsForm" action=javascript:ok(this)><textarea name="jsTA" id="jsTA0" onkeypress="return checkShiftEnter(event)" rows="5" cols="100">
-   console.log(this)   
+   o=output//reference to output div below this form
    </textarea>
-   <input name="Submit" onclick=javascript:evalJS(this.form,this.form.elements[0].value) type="submit" value="Eval JS"/></form></div><div id=0 class=output>
-   <div id=0 class=output></div></div>
+   <input name="Submit" onclick=javascript:evalJS(this.form,this.form.elements[0].value) type="submit" value="Eval JS"/><input name="ClearOutput" onclick=javascript:this.form.parentElement.nextSibling.innerHTML='' type="submit" value="Clear Output"/></form></div><div id=0 class=output><div id=0 class=output></div></div>
   </body>
 </html>
 
 <!--
-   document.getElementById('0').insertAdjacentHTML('beforebegin','<svg class="svg" name="svgn" id=s'+count+' width="600px" height="400px"></svg>')
+o=output
+o.insertAdjacentHTML('afterbegin','<svg class="svg" name="svgn" id=s'+count+' width="600px" height="400px"></svg>')
+s=o.childNodes[0]   
    var data = [];
    var i;   for (i = 0; i < 100; i++) {
    data.push({x: Math.random() * 600, y: Math.random() * 400}); // random data points
    }
    for (i = 0; i < 100; i++) {
-   document.getElementById('s'+count).innerHTML=document.getElementById('s'+count).innerHTML+'<circle cx='+data[i].x+' cy='+data[i].y+' r=2></circle>'  
-}//count ensures the svg element is uniquely named and the last one is referenced 
-   -->
+s.innerHTML=s.innerHTML+'<circle cx='+data[i].x+' cy='+data[i].y+' r=2></circle>'  
+}
+-->
