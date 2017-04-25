@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<ul class='nav'><li><a href="./SVGcontents.html">Contents</a></li><li><a href="./interactiveSVG.html">Interactive SVG</a></li></ul>
+</head>
+<style>
+//.nav {display: in-line;color: red;}
+.nav li {display: inline; border-spacing: 2px; padding: 2em;}
+h1 {color: red;}
+
+.dropdown:before {content:"click me";}
+.dropdown-container:focus .dropdown-content {display:block;}
+.dropdown-content {display: none;}
+
+table, th, td {border: 1px solid black; font-family: monospace;font: courier;}
+//.dropdown {visibility: hidden;}
+</style>
+<body>
+
+<script type="application/ecmascript">
+var SVGReferences=['http://www.w3.org/TR/SVG11/coords.html','https://developer.mozilla.org/en-US/docs/Web/API/SVGLineElement','https://developer.mozilla.org/en-US/docs/Web/API/SVGPolylineElement','https://developer.mozilla.org/en-US/docs/Web/API/SVGElement','https://svgwg.org/svg2-draft/coords.html#ViewBoxAttribute','http://stackoverflow.com/questions/9723422/is-there-some-innerhtml-replacement-in-svg-xml']
+
+//Write HTML unordered list of SVG References
+s='<ul>'
+for (i in SVGReferences) {
+	s+='<li><a href="'+SVGReferences[i]+'" >'+SVGReferences[i]+'</li>'
+}
+s+='</ul>'
+
+document.body.innerHTML+=s
+
+var ClassReferences=['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes','https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects','https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty','https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes','https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute','http://phrogz.net/death-to-hasownproperty']
+</script>
+</body>
+</html>
